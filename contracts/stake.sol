@@ -13,8 +13,8 @@ contract Vesting is Ownable{
     struct Stake{
         address user;
         uint256 amount;
-        bool isActive;
         uint256 timestamp;
+        bool isActive;
     }
 
 
@@ -45,20 +45,20 @@ function _addStaker(address staker) public returns(uint256){
 
 
 //stakeToken removes the amount staked from the stakers account and depositi in the contract
-// function _stakeToken(uint256 _amount) public{
-//     require(_amount > 0, "You have to stake a value greater than 0");
-//     uint256 index = stakes[msg.sender];
-//     uint timestamp = block.timestamp;
-//     if (index == 0){
-//         index = _addStaker(msg.sender);
-//     }
-//     stakeHolders[index].push(Stake(msg.sender,_amount,isActive, timestamp));
-//     emit Staked(msg.sender, amount, index, isActive, timestamp);
+function _stakeToken(uint256 _amount) public{
+    require(_amount > 0, "You have to stake a value greater than 0");
+    uint256 index = stakes[msg.sender];
+    uint timestamp = block.timestamp;
+    if (index == 0){
+        index = _addStaker(msg.sender);
+    }
+    stakeHolders[index].push(Stake(msg.sender,_amount,Stake.isActive, timestamp));
+   emit Staked(msg.sender, _amount, index, Stake.isActive, timestamp);
 
 
 
 
 
-// }
+ }
 
 }
